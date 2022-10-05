@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        @import url("CSS/buttonCss.css");
+
+        @media screen and (min-width:1280px) {
+            #main {
+                margin-left: 30%;
+            }
+
+            #chb {
+                margin-left: 534px;
+            }
+
+            #btnRe {
+                margin-left: 31.5%;
+            }
+
+            #bg,
+            #items {
+                width: 600px;
+            }
+
+            #nose {
+                margin-left: 103px;
+            }
+
+            #noseHair {
+                margin-left: 306px;
+            }
+
+            #shine {
+                margin-left: 68px;
+            }
+        }
+
+        @media screen and (max-width:1279px) and (min-width:768px) {
+            #main {
+                margin-left: 20%;
+            }
+
+            #chb {
+                margin-left: 534px;
+            }
+
+            #btnRe {
+                margin-left: 22.5%;
+            }
+
+            #bg,
+            #items {
+                width: 600px;
+            }
+
+            #nose {
+                margin-left: 103px;
+            }
+
+            #noseHair {
+                margin-left: 306px;
+            }
+
+            #shine {
+                margin-left: 68px;
+            }
+        }
+
+        @media screen and (max-width:767px) {
+            #chb {
+                margin-left: 434px;
+            }
+
+            #btnRe {
+                margin-left: 3.5%;
+            }
+
+            #bg,
+            #items {
+                width: 500px;
+            }
+
+            #nose {
+                margin-left: 50px;
+            }
+
+            #noseHair {
+                margin-left: 253px;
+            }
+
+            #shine {
+                margin-left: 15px;
+            }
+        }
+
+        #main {
+            position: relative;
+        }
+
+        #bg {
+            height: 620px;
+            position: absolute;
+            text-align: center;
+            z-index: 1;
+        }
+
+        #nose {
+            width: 400px;
+            position: absolute;
+            float: left;
+            z-index: 3;
+            margin-top: 53px;
+        }
+
+        #shine {
+            width: 470px;
+            height: 470px;
+            position: absolute;
+            float: left;
+            z-index: 10;
+            margin-top: 53px;
+            display: none;
+        }
+
+        #noseHair {
+            z-index: 2;
+            position: absolute;
+            float: left;
+            margin-top: 350px;
+            animation: flutter 1s infinite alternate;
+        }
+
+        /* 讓鼻毛上下抖動 */
+        @keyframes flutter {
+            from {
+                margin-top: 350px;
+            }
+
+            to {
+                margin-top: 352px;
+            }
+        }
+
+        #chb {
+            float: left;
+            position: fixed;
+            z-index: 6;
+            margin-top: 543px;
+        }
+
+        #btnRe {
+            font-size: 4rem;
+            position: absolute;
+            float: left;
+            margin-top: 521px;
+            z-index: 4;
+            font-family: 'Agency FB';
+        }
+
+        #btnRe:hover {
+            color: red;
+        }
+
+        #items {
+            position: fixed;
+            margin-top: 600px;
+            background-color: cornsilk;
+            height: 100px;
+            z-index: 5;
+            display: none;
+            overflow: auto;
+        }
+
+        #items>div {
+            width: 85px;
+            height: 85px;
+            background-color: rgb(55, 55, 55);
+            float: left;
+            margin: 5.5px;
+        }
+
+        #items>div:hover {
+            background-color: rgb(112, 112, 112);
+        }
+
+        #items>div>img {
+            object-position: center center;
+            object-fit: scale-down;
+            width: 85px;
+            height: 85px;
+        }
+
+        .dark {
+            background-color: rgb(0, 0, 39);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <img id="bg" src="nose/background.PNG" ondragstart="return false" />
+        <img id="nose" src="nose/nose.PNG" ondragstart="return false" />
+        <img id="noseHair" ondragstart="return false" />
+        <img id="shine" src="nose\unnamed.png" ondragstart="return false">
+        <div id="chb">
+            <input type="checkbox" id="switch" />
+            <label for="switch"></label>
+        </div>
+        <div id="items"></div>
+    </div>
+    <div id="btnRe">Again?</div>
+
+    <script src="Scripts/jquery-3.5.1.min.js"></script>
+    <script>
+        var randNum, PX = 352, total = 8;
+
+        $(() => {
+            init();
+
+            $('#noseHair').on('click', () => {
+                $('#noseHair').css({ 'animation': 'paused' });
+
+                pluck();
+                collect(randNum);
+                reList();
+
+                $('#noseHair').off('click');
+            })
+
+            $('#btnRe').on('click', () => { location.reload(); })
+            $('#switch').on('click', () => {
+                $('#items').toggle();
+                $('body').toggleClass('dark');
+            })
+        })
+
+        //初始化
+        function init() {
+            randNum = Math.ceil(Math.random() * total);
+            $('#noseHair').attr('src', `nose/${randNum}.png`);
+            reList();
+        }
+        //拔出鼻毛
+        function pluck() {
+            $('#noseHair').animate({ 'margin-top': '485px' }, 1500, () => {
+                $('#noseHair').animate({
+                    'margin-top': '160px',
+                    'margin-left': $(window).width() < 768 ? '213px' : '273px',
+                    'width': '80px'
+                }, 2000, () => {
+                    $('#shine').toggle();
+                })
+
+                $('#nose').fadeOut(1000);
+            })
+        }
+        //重整收藏
+        function reList() {
+            let itemHtml = '';
+            let LS = new localStorageOperate();
+
+            $('#items').empty();
+
+            for (let i = 0; i < total; i++) {
+                itemHtml += `<div><img src="nose/${LS.noseHairList[i] != null ? LS.noseHairList[i] : 999}.png" ondragstart="return false"/></div>`;
+            }
+
+            $('#items').html(itemHtml);
+        }
+        //蒐藏鼻毛
+        function collect(randNum) {
+            let LS = new localStorageOperate();
+
+            LS.edit(randNum);
+        }
+        //操作localStorage
+        class localStorageOperate {
+            noseHairList;
+
+            constructor() {
+                this.noseHairList = this.getList();
+            }
+
+            getList() {
+                let JsonList = localStorage.getItem('noseHairList');
+                return JsonList != null ? JSON.parse(JsonList) : new Array(total);
+            }
+
+            edit(num) {
+                if (this.noseHairList[num - 1] == null) {
+                    this.noseHairList[num - 1] = num;
+                    localStorage.setItem('noseHairList', JSON.stringify(this.noseHairList));
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

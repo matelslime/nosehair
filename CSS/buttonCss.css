@@ -1,0 +1,36 @@
+input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+label {
+    cursor: pointer;
+    width: 55px;
+    height: 31px;
+    background: rgb(255, 238, 220);
+    display: block;
+    border-radius: 15px;
+    position: relative;
+}
+
+label:after {
+    content: '';
+    position: absolute;
+    top: 1.5px;
+    left: 4px;
+    width: 28px;
+    height: 28px;
+    background: rgb(235, 179, 123);
+    border-radius: 17px;
+    transition: 0.3s;
+}
+
+label:active:after {
+	width: 49px;
+}
+
+input:checked + label:after {
+	left: calc(100% - 5px);
+	transform: translateX(-100%);
+}
