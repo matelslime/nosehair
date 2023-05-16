@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        @import url("CSS/buttonCss.css");
+
+        #main {
+            display: flex;
+            justify-content: center;
+        }
+
+        .bg {
+            background-color: #ffb973;
+            border-radius: 2%;
+            height: 38.85rem;
+            width: 37.6rem;
+            z-index: 1;
+        }
+
+        .nose {
+            margin-top: 53px;
+            position: absolute;
+            width: 25rem;
+            z-index: 3;
+        }
+
+        .shine {
+            display: none;
+            height: 470px;
+            margin-top: 53px;
+            position: absolute;
+            width: 470px;
+            z-index: 10;
+        }
+
+        .noseHair {
+            animation: flutter 1s infinite alternate;
+            margin-left: 3.5rem;
+            margin-top: 21.6rem;
+            position: absolute;
+            z-index: 2;
+        }
+
+        /* 讓鼻毛上下抖動 */
+        @keyframes flutter {
+            from {
+                /* margin-top: 349px; */
+                margin-top: 21.5rem;
+            }
+
+            to {
+                /* margin-top: 352px; */
+                margin-top: 21.75rem;
+            }
+        }
+
+        #chb {
+            margin-top: 34.7rem;
+            margin-left: 32rem;
+            position: absolute;
+            z-index: 6;
+        }
+
+        .btnRe {
+            font-family: 'Agency FB';
+            font-size: 4rem;
+            margin-top: 33rem;
+            margin-right: 25rem;
+            position: absolute;
+            z-index: 4;
+        }
+
+        .btnRe:hover {
+            color: red;
+        }
+
+        #items {
+            background-color: cornsilk;
+            /* border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px; */
+            display: none;
+            height: 100px;
+            margin-top: 38.2rem;
+            overflow: auto;
+            position: absolute;
+            width: 600px;
+            z-index: 5;
+        }
+
+        #items>div {
+            width: 85px;
+            height: 85px;
+            background-color: #373737;
+            float: left;
+            margin: 5.5px;
+        }
+
+        #items>div:hover {
+            background-color: #707070;
+        }
+
+        #items>div>img {
+            object-position: center center;
+            object-fit: scale-down;
+            width: 85px;
+            height: 85px;
+        }
+
+        .dark {
+            background-color: #000027;
+        }
+
+        /* @media screen and (min-width:1280px) {
+            #bg,
+            #items {
+                width: 600px;
+            }
+        }
+
+        @media screen and (max-width:1279px) and (min-width:768px) {
+            #bg,
+            #items {
+                width: 600px;
+            }
+        } */
+
+        @media screen and (max-width:767px) {
+            .bg,
+            #items {
+                width: 500px;
+            }
+
+            #chb {
+                margin-left: 26rem;
+            }
+
+            .btnRe {
+                margin-right: 19rem;
+            }
+        }
+
+        .bg-M {
+            border-radius: 0;
+            height: 99.25vh;
+            width: 100%;
+        }
+
+        .nose-M {
+            height: 50vh;
+            margin-top: 0;
+            width: 98.5%;
+        }
+
+        .shine-M {
+            /* display: none; */
+            height: 470px;
+            margin-top: 53px;
+            width: 470px;
+        }
+
+        .noseHair-M {
+            animation: flutter-M 1s infinite alternate;
+            margin-left: 8rem;
+            width: 7rem;
+        }
+
+        /* 讓鼻毛上下抖動 */
+        @keyframes flutter-M {
+            from {
+                margin-top: 48.5rem;
+            }
+
+            to {
+                margin-top: 49.3rem;
+            }
+        }
+
+        .btnRe-M {
+            bottom: 1rem;
+            font-size: 16rem;
+            margin-right: -0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="bg" class="bg" ondragstart="return false"></div>
+        <img id="nose" class="nose" src="nose/nose.PNG" ondragstart="return false" />
+        <img id="noseHair" class="noseHair" ondragstart="return false" />
+        <img id="shine" class="shine" src="nose\unnamed.png" ondragstart="return false">
+        <div id="chb">
+            <input type="checkbox" id="switch" />
+            <label for="switch"></label>
+        </div>
+        <div id="items"></div>
+        <div id="btnRe" class="btnRe">Again?</div>
+    </div>
+
+    <script src="Scripts/jquery-3.5.1.min.js"></script>
+    <script src="Scripts/main.js"></script>
+</body>
+
+</html>
